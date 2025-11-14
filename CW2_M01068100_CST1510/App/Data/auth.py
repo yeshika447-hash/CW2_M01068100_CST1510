@@ -1,3 +1,5 @@
+#WEEK 7
+
 import bcrypt
 import os
 

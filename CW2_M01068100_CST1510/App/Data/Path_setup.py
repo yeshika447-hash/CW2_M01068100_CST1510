@@ -1,3 +1,5 @@
+#WEEK 8
+
 import sqlite3
 import pandas as pd
 import bcrypt

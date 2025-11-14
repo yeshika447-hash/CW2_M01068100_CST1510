@@ -1,0 +1,6 @@
+Week 7:
+    bcrypt == 4.2.0
+
+Week 8
+    sqlite3
+    pandas

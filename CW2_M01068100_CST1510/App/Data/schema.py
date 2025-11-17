@@ -1,4 +1,5 @@
 #WEEK 8
+import sqlite3
 
 def create_users_table(conn):
     """Create users table"""

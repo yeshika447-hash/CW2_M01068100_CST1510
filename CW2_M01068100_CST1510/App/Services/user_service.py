@@ -1,9 +1,12 @@
 import bcrypt
+import sqlite3
+import pandas as pd
 from pathlib import Path
-from app.Data.db import connect_database
-from app.Data.users import get_user_by_username, insert_user
-from app.Data.schema import create_users_table
+from CW2_M01068100_CST1510.app.Data.db import connect_database
+from CW2_M01068100_CST1510.app.Data.users import get_user_by_username, insert_user
+from CW2_M01068100_CST1510.app.Data.schema import create_users_table
 
+DATA_DIR = Path("DATA")
 
 def register_user(username, password, role='user'):
     """Register new user with password hashing."""

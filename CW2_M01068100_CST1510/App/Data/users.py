@@ -1,18 +1,20 @@
-from app.Data.db import connect_database
+from CW2_M01068100_CST1510.app.Data.db import connect_database
+import sqlite3
 
-def get_user_by_username(username):
+def get_user_by_username(username: str, conn = None):
     """Retrieve user by username."""
-    conn = connect_database()
+    own_conn = False
+    if conn is None:
+        conn = connect_database()
+        own_conn = True
     cursor = conn.cursor()
-    cursor.execute(
-        "SELECT * FROM users WHERE username = ?",
-        (username,)
-    )
+    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
     user = cursor.fetchone()
-    conn.close()
+    if own_conn:
+        conn.close()
     return user
 
-def insert_user(username, password_hash, role='user'):
+def insert_user(username, password_hash, role='user', conn = None):
     """Insert new user."""
     conn = connect_database()
     cursor = conn.cursor()

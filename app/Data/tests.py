@@ -1,13 +1,13 @@
 import pandas as pd
 
-from CW2_M01068100_CST1510.app.Data.db import connect_database
-from CW2_M01068100_CST1510.app.Data.incidents import (
+from app.Data.db import connect_database
+from app.Data.incidents import (
     insert_incident,
     update_incident_status,
     delete_incident
 )
-from CW2_M01068100_CST1510.app.Services.user_service import register_user, login_user
-from CW2_M01068100_CST1510.app.Data.analytics import (
+from app.Services.user_service import register_user, login_user
+from app.Data.analytics import (
     get_incidents_by_type_count,
     get_high_severity_by_status
 )

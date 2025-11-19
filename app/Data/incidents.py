@@ -1,7 +1,7 @@
 import pandas as pd
 import bcrypt
 from pathlib import path
-from CW2_M01068100_CST1510.app.Data.db import connect_database
+from app.Data.db import connect_database
 import sqlite3
 
 def insert_incident(conn, date_reported, incident_type, severity, status, description, reported_by=None):

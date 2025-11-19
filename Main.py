@@ -1,8 +1,8 @@
 import pandas as pd
-from CW2_M01068100_CST1510.app.Data.db import connect_database
-from CW2_M01068100_CST1510.app.Data.schema import create_all_tables
-from CW2_M01068100_CST1510.app.Services.user_service import register_user, login_user, migrate_users_from_file
-from CW2_M01068100_CST1510.app.Data.incidents import insert_incident, get_all_incidents
+from app.Data.db import connect_database
+from app.Data.schema import create_all_tables
+from app.Services.user_service import register_user, login_user, migrate_users_from_file
+from app.Data.incidents import insert_incident, get_all_incidents
 
 def main():
     print("=" * 60)

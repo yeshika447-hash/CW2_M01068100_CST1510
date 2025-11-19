@@ -13,15 +13,15 @@ def connect_database(db_path=DB_PATH):
     print(f"Connected to database at: {db_path}")
     return conn
 
-from CW2_M01068100_CST1510.app.Data.db import connect_database, DB_PATH
-from CW2_M01068100_CST1510.app.Data.schema import (
+from app.Data.db import connect_database, DB_PATH
+from app.Data.schema import (
     create_users_table,
     create_cyber_incidents_table,
     create_datasets_metadata_table,
     create_it_tickets_table
 )
-from CW2_M01068100_CST1510.app.Services.user_service import migrate_users_from_file
-from CW2_M01068100_CST1510.app.Data.load import load_all_csv_data
+from app.Services.user_service import migrate_users_from_file
+from app.Data.load import load_all_csv_data
 
 
 def create_all_tables(conn):

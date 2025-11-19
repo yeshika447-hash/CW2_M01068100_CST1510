@@ -1,5 +1,5 @@
 import pandas as pd
-from CW2_M01068100_CST1510.app.Data.db import connect_database
+from app.Data.db import connect_database
 
 def insert_dataset(dataset_name, file_name, records, description, owner):
     conn = connect_database()

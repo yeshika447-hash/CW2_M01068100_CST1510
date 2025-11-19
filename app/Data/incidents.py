@@ -1,6 +1,6 @@
 import pandas as pd
 import bcrypt
-from pathlib import path
+from pathlib import Path
 from app.Data.db import connect_database
 import sqlite3
 

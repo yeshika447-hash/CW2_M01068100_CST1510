@@ -9,7 +9,7 @@ DB_PATH =Path("DATA") / "intelligence_platform.db"
 def connect_database(db_path=DB_PATH):
     db_path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(db_path))
-    conn.execute(" Foreign_keys = ON; ")
+    conn.execute()
     print(f"Connected to database at: {db_path}")
     return conn
 
@@ -32,7 +32,7 @@ def create_all_tables(conn):
     create_cyber_incidents_table(conn)
     create_datasets_metadata_table(conn)
     create_it_tickets_table(conn)
-    print("✅ All tables created successfully!")
+    print(" All tables created successfully!")
 
 
 def setup_database_complete():

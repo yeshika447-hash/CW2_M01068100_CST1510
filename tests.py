@@ -7,7 +7,7 @@ from app.Data.incidents import (
     delete_incident
 )
 from app.Services.user_service import register_user, login_user
-from app.Data.analytics import (
+from app.Data.incidents import (
     get_incidents_by_type_count,
     get_high_severity_by_status
 )

@@ -1,5 +1,5 @@
 import pandas as pd
-from app.Data.db import connect_database
+from db import connect_database
 
 def insert_ticket(date, issue_type, severity, status, assigned_to, description):
     conn = connect_database()

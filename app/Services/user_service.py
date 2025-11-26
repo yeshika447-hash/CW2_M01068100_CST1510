@@ -1,10 +1,9 @@
 import bcrypt
-import sqlite3
 import pandas as pd
 from pathlib import Path
-from app.Data.db import connect_database
-from app.Data.users import get_user_by_username, insert_user
-from app.Data.schema import create_users_table
+from Data.db import connect_database
+from Data.users import get_user_by_username, insert_user
+from Data.schema import create_users_table
 
 DATA_DIR = Path("DATA")
 

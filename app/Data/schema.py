@@ -1,7 +1,6 @@
 #WEEK 8
-import sqlite3
 import pandas as pd
-from app.Data.db import connect_database
+from db import connect_database
 
 def create_users_table(conn):
     """Create users table"""

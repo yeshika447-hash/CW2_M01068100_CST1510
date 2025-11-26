@@ -1,8 +1,8 @@
 import pandas as pd
 from pathlib import Path
-from app.Data.db import connect_database
-from app.Data.users import get_user_by_username, insert_user
-from app.Data.schema import create_users_table
+from db import connect_database
+from users import get_user_by_username, insert_user
+from schema import create_users_table
 
 DATA_DIR = Path("DATA")
 

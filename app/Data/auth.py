@@ -3,7 +3,8 @@
 import bcrypt
 import os
 
-USER_DATA_FILE = "users.txt"
+
+USER_DATA_FILE="users.txt"
 
 def hash_password(plain_text_password):
     """

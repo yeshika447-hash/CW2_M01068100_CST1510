@@ -1,6 +1,6 @@
 #WEEK 8
 import pandas as pd
-from db import connect_database
+from app.Data.db import connect_database
 
 def create_users_table(conn):
     """Create users table"""
@@ -10,8 +10,7 @@ def create_users_table(conn):
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    username TEXT NOT NULL UNIQUE,
                    password_hash TEXT NOT NULL,
-                   role TEXT DEFAULT 'user'
-    )
+                   role TEXT DEFAULT 'user')
     """)
     conn.commit()
 

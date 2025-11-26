@@ -5,7 +5,10 @@ st.write("This is my first app!")
 
 from app.Data.db import connect_database
 
-from app.Data.users import get_user_by_username, insert_user
+from app.Data.users import (
+    get_user_by_username, 
+    insert_user
+    )
 
 from app.Data.incidents import (
     get_all_incidents, 

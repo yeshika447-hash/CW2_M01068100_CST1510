@@ -12,7 +12,6 @@ def connect_database(db_path=DB_PATH):
     print(f"Connected to database at: {db_path}")
     return conn
 
-from app.Data.db import connect_database, DB_PATH
 from app.Data.schema import (
     create_users_table,
     create_cyber_incidents_table,

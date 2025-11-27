@@ -2,21 +2,6 @@ import pandas as pd
 from app.Data.db import connect_database
 
 def insert_incident(conn, date_reported, incident_type, severity, status, description, reported_by=None):
-    def insert_incident(conn, date, incident_type, severity, status, description, reported_by=None):"""
-    Insert a new cyber incident into the database.
-    
-    Args:
-        conn: Database connection
-        date: Incident date (YYYY-MM-DD)
-        incident_type: Type of incident
-        severity: Severity level
-        status: Current status
-        description: Incident description
-        reported_by: Username of reporter (optional)
-        
-    Returns:
-        int: ID of the inserted incident
-    """
     conn = connect_database()
     cursor = conn.cursor()
     cursor.execute("""

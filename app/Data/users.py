@@ -1,4 +1,5 @@
 from app.Data.db import connect_database
+import bcrypt
 
 def get_user_by_username(username: str, conn = None):
     """Retrieve user by username."""
@@ -13,8 +14,13 @@ def get_user_by_username(username: str, conn = None):
         conn.close()
     return user
 
-def insert_user(username, password_hash, role='user', conn = None):
-    """Insert new user."""
+def insert_user(conn, username, plain_text_password, password_hash, role='user'):
+    
+    password_bytes = plain_text_password.encode('utf-8')
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password_bytes, salt)
+    password_hash = hashed.decode('utf-8')
+
     conn = connect_database()
     cursor = conn.cursor()
     cursor.execute(

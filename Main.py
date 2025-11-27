@@ -1,4 +1,4 @@
-import pandas as pd
+import sqlite3
 from app.Data.db import connect_database
 from app.Data.schema import create_all_tables
 from app.Services.user_service import register_user, login_user, migrate_users_from_file
@@ -18,10 +18,10 @@ def main():
     migrate_users_from_file()
     
     # 3. Test authentication
-    success, msg = register_user("alice", "SecurePass123!", "analyst")
+    success, msg = register_user("alice", "SecurePassword123!", "analyst")
     print(msg)
     
-    success, msg = login_user("alice", "SecurePass123!")
+    success, msg = login_user("alice", "SecurePassword123!")
     print(msg)
     
     # 4. Test CRUD

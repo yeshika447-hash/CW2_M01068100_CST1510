@@ -6,11 +6,11 @@ def create_users_table(conn):
     """Create users table"""
     cursor = conn.cursor()
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS users table (
+        CREATE TABLE IF NOT EXISTS users (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    username TEXT NOT NULL UNIQUE,
                    password_hash TEXT NOT NULL,
-                   role TEXT DEFAULT 'user')
+                   role TEXT DEFAULT 'users')
     """)
     conn.commit()
 
@@ -51,22 +51,7 @@ def create_cyber_incidents_table(conn):
 
 
 def create_datasets_metadata_table(conn):
-    cursor = conn.cursor()
-    cursor.execute("""
-    Create the datasets_metadata table.
-
-    Required columns:
-    - id INTEGER PRIMARY KEY AUTOINCREMENT
-    - dataset_name TEXT NOT NULL
-    - category TEXT
-    - source TEXT
-    - last_updated TEXT
-    - record_count INTEGER
-    - file_size_mb REAL
-    - created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    """)
-    
+ 
     cursor = conn.cursor()
 
     create_table_sql = """
@@ -124,30 +109,6 @@ def create_it_tickets_table(conn):
     conn.commit()
     print(" it_tickets table created successfully!")
     conn.commit()
-
-def insert_dataset(dataset_name, file_name, records, description, owner):
-    conn = connect_database()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        INSERT INTO datasets_metadata 
-        (dataset_name, file_name, records, description, owner)
-        VALUES (?, ?, ?, ?, ?)
-    """, (dataset_name, file_name, records, description, owner))
-
-    conn.commit()
-    dataset_id = cursor.lastrowid
-    conn.close()
-
-    return dataset_id
-
-
-def get_all_datasets():
-    conn = connect_database()
-    df = pd.read_sql_query("SELECT * FROM datasets_metadata", conn)
-    conn.close()
-    return df
-
 
 def create_all_tables(conn):
     """Create all tables."""

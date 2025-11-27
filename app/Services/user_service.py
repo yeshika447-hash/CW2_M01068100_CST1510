@@ -6,9 +6,8 @@ from app.Data.schema import create_users_table
 
 DATA_DIR = Path("DATA")
 
-def register_user(conn, username, password_bytes, password_hash, role='user'):
-    """Register new user with password hashing."""
-
+def register_user(conn, username, password, role='user'):
+  
     conn = connect_database()
     cursor = conn.cursor()
 
@@ -19,14 +18,14 @@ def register_user(conn, username, password_bytes, password_hash, role='user'):
         return False, f"Username (username) already exists."
 
     #Hash the password
-    password_bytes = password_bytes.encode('utf-8')
+    password_bytes = password.encode('utf-8')
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password_bytes, salt)
     password_hash = hashed.decode('utf-8')
 
     #Insert new user
     cursor.execute(
-        "INSERT INTO users (username, password hash, role) VALUES (?, ?, ?)",
+        "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)",
         (username, password_hash, role)
     )
     conn.commit()
@@ -74,7 +73,7 @@ def migrate_users_from_file(filepath='DATA/users.txt'):
                 continue
 
             try:
-                username, password, role = line.split(',')
+                username, password_bytes, password_hash, role = line.split(',')
             except ValueError:
                 skipped += 1
                 continue
@@ -86,7 +85,7 @@ def migrate_users_from_file(filepath='DATA/users.txt'):
 
             # Hash password
             password_hash = bcrypt.hashpw(
-                password.encode('utf-8'),
+                password_bytes.encode('utf-8'),
                 bcrypt.gensalt()
             ).decode('utf-8')
 

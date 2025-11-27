@@ -15,12 +15,14 @@ def create_users_table(conn):
     conn.commit()
 
 def create_cyber_incidents_table(conn):
-    """Create cyber_incidents table."""
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS cyber_incidents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT,
             incident_type TEXT NOT NULL,
+            severity TEXT,
+            status TEXT,
             description TEXT,
             reported_by INTEGER,
             date_reported TEXT,
@@ -39,6 +41,7 @@ def create_cyber_incidents_table(conn):
         status TEXT,
         description TEXT,
         reported_by TEXT,
+        date_reported TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (reported_by) REFERENCES users(username)
     )
@@ -59,6 +62,7 @@ def create_datasets_metadata_table(conn):
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         dataset_name TEXT NOT NULL,
         category TEXT,
+        severity TEXT,
         source TEXT,
         last_updated TEXT,
         record_count INTEGER,
@@ -81,6 +85,7 @@ def create_it_tickets_table(conn):
             user_id INTEGER NOT NULL,
             issue_title TEXT NOT NULL,
             issue_description TEXT,
+            severity TEXT,
             priority TEXT DEFAULT 'Medium',
             status TEXT DEFAULT 'Open',
             date_created TEXT,
@@ -94,6 +99,7 @@ def create_it_tickets_table(conn):
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         ticket_id TEXT UNIQUE NOT NULL,
         priority TEXT,
+        severity TEXT,
         status TEXT,
         category TEXT,
         subject TEXT NOT NULL,

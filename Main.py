@@ -1,4 +1,3 @@
-import sqlite3
 from app.Data.db import connect_database
 from app.Data.schema import create_all_tables
 from app.Services.user_service import register_user, login_user, migrate_users_from_file

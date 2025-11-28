@@ -35,7 +35,7 @@ def main():
     print(f"Created incident #{incident_id}")
     
     # 5. Query data
-    df = get_all_incidents()
+    df = get_all_incidents(conn)
     print(f"Total incidents: {len(df)}")
 
 if __name__ == "__main__":

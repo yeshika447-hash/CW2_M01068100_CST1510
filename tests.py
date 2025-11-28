@@ -29,10 +29,10 @@ def run_comprehensive_tests():
     # -----------------------------
     print("\n[TEST 1] Authentication")
 
-    success, msg = register_user("test_user", "TestPass123!", "user")
+    success, msg = register_user("test_user", "TestPassword123!", "user")
     print(f"  Register: {'✅' if success else '❌'} {msg}")
 
-    success, msg = login_user("test_user", "TestPass123!")
+    success, msg = login_user("test_user", "TestPassword123!")
     print(f"  Login:    {'✅' if success else '❌'} {msg}")
 
     # -----------------------------

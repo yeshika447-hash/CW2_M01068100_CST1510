@@ -16,11 +16,11 @@ from app.Data.incidents import (
     update_incident_status, 
     delete_incident)
 
-from app.Data.schema import get_all_datasets
+from app.Data.datasets import get_all_datasets
 
 from app.Data.tickets import get_all_tickets
 
-conn = connect_database("DATA") / "intelligence_platform.db"
+conn = connect_database()
 
 incidents = get_all_incidents(conn)
 

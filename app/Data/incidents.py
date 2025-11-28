@@ -14,7 +14,7 @@ def insert_incident(conn, date_reported, incident_type, severity, status, descri
     conn.close()
     return incident_id
 
-def get_all_incidents():
+def get_all_incidents(conn):
     def get_all_incidents(conn):"""
     Retrieve all incidents from the database.
     

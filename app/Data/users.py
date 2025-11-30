@@ -14,7 +14,7 @@ def get_user_by_username(username: str, conn = None):
         conn.close()
     return user
 
-def insert_user(conn, username, plain_text_password, password_hash, role='user'):
+def insert_user(conn, username, plain_text_password, password_hash, role):
     
     password_bytes = plain_text_password.encode('utf-8')
     salt = bcrypt.gensalt()

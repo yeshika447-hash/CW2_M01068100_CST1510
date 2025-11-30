@@ -41,9 +41,10 @@ with tab_login:
         # Simple credential check (for teaching only – not secure!)
         users = st.session_state.users
         if (
-            login_username in users 
-            and users[login_username]["password"] == login_password
+        login_username in users 
+        and users[login_username]["password"] == login_password
         ):
+
             st.session_state.logged_in = True
             st.session_state.username = login_username
             st.session_state.role = users[login_username]["role"]

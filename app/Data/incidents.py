@@ -1,7 +1,7 @@
 import pandas as pd
 from app.Data.db import connect_database
 
-def insert_incident(conn, date_reported, incident_type, severity, status, description, reported_by=None):
+def insert_incident(date_reported, incident_type, severity, status, description, reported_by):
     conn = connect_database()
     cursor = conn.cursor()
     cursor.execute("""

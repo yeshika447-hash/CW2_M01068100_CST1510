@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from pathlib import Path
+
+data_folder = Path("DATA")
 
 st.set_page_config(page_title="Analytics", page_icon="📈", layout="wide")
 
@@ -15,7 +18,7 @@ role = st.session_state.get("role", None)
 def cyber_analytics():
     st.header("🔐 Cybersecurity Analytics")
 
-    df = pd.read_csv("cyber_incidents.csv")
+    df = pd.read_csv(data_folder / "cyber_incidents.csv")
 
     st.subheader("Phishing Spike Detection")
     phishing = df[df["incident_type"] == "Phishing"]
@@ -33,7 +36,7 @@ def cyber_analytics():
 def datascience_analytics():
     st.header("📊 Data Science Analytics")
 
-    df = pd.read_csv("datasets_metadata.csv")
+    df = pd.read_csv(data_folder / "datasets_metadata.csv")
 
     st.subheader("Dataset Size Distribution")
     fig1 = px.histogram(df, x="size_mb", title="Dataset Size Distribution")
@@ -49,7 +52,7 @@ def datascience_analytics():
 def it_analytics():
     st.header("🛠 IT Operations Analytics")
 
-    df = pd.read_csv("it_tickets.csv")
+    df = pd.read_csv(data_folder / "it_tickets.csv")
 
     st.subheader("Staff Resolution Performance")
     performance = df.groupby("assigned_to")[["resolution_time"]].mean().reset_index()
@@ -66,7 +69,7 @@ if role == "cyber":
     cyber_analytics()
 elif role == "datascience":
     datascience_analytics()
-elif role == "itops":
+elif role == "it":
     it_analytics()
 else:
     st.warning("No role detected.")

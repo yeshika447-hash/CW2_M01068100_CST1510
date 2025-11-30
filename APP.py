@@ -1,7 +1,15 @@
 import streamlit as st
+import pandas as pd
+import plotly.express as px
 
-st.title("Hello!")
-st.write("This is my first app!")
+st.set_page_config(
+    page_title = "Intelligence Platform",
+
+    layout = "wide"
+)
+
+st.title("📊Dashboard")
+st.write("Welcome to Streamlit!")
 
 from app.Data.db import connect_database
 

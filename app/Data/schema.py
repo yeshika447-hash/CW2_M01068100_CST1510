@@ -1,5 +1,4 @@
 #WEEK 8
-import pandas as pd
 from app.Data.db import connect_database
 
 def create_users_table(conn):

@@ -4,29 +4,25 @@ from app.Data.db import connect_database
 from app.Data.users import get_user_by_username, insert_user
 from app.Data.schema import create_users_table
 
-DATA_DIR = Path("DATA")
 
-def register_user(conn, username, password, role='user'):
-  
+def register_user(username, password, role='user'):
+    """Register a new user."""
     conn = connect_database()
     cursor = conn.cursor()
 
-    #Check if user already exists
-    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+    # Check if user exists
+    cursor.execute("SELECT 1 FROM users WHERE username = ?", (username,))
     if cursor.fetchone():
         conn.close()
-        return False, f"Username (username) already exists."
+        return False, f"Username '{username}' already exists."
 
-    #Hash the password
-    password_bytes = password.encode('utf-8')
-    salt = bcrypt.gensalt()
-    hashed = bcrypt.hashpw(password_bytes, salt)
-    password_hash = hashed.decode('utf-8')
+    # Hash password
+    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-    #Insert new user
+    # Insert user
     cursor.execute(
         "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)",
-        (username, password_hash, role)
+        (username, hashed, role)
     )
     conn.commit()
     conn.close()
@@ -35,23 +31,22 @@ def register_user(conn, username, password, role='user'):
 
 
 def login_user(username, password):
-    """Authenticate user."""
+    """Authenticate user login."""
     user = get_user_by_username(username)
     if not user:
         return False, "User not found."
-    
-    # Verify password
+
     stored_hash = user[2]  # password_hash column
+
     if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
         return True, "Login successful!"
-    
     return False, "Incorrect password."
 
 
 def migrate_users_from_file(filepath='DATA/users.txt'):
-    """Migrate users from a text file into the database.
-    
-    Expected file format per line:
+    """
+    Migrate users from a text file.
+    Expected format per line:
         username,password,role
     """
     file_path = Path(filepath)
@@ -59,38 +54,41 @@ def migrate_users_from_file(filepath='DATA/users.txt'):
         return False, f"File not found: {filepath}"
 
     conn = connect_database()
-    create_users_table(conn)  # ensure table exists
+    create_users_table(conn)
 
     migrated = 0
     skipped = 0
 
-    with file_path.open('r') as file:
-        for line in file:
+    with file_path.open('r') as f:
+        for line in f:
             line = line.strip()
-
-            # Skip empty lines
             if not line:
                 continue
 
-            try:
-                username, password_bytes, password_hash, role = line.split(',')
-            except ValueError:
+            parts = line.split(',')
+            if len(parts) != 3:
                 skipped += 1
                 continue
 
-            # Skip if user already exists
+            username, password, role = parts
+
+            # Skip existing users
             if get_user_by_username(username):
                 skipped += 1
                 continue
 
-            # Hash password
-            password_hash = bcrypt.hashpw(
-                password_bytes.encode('utf-8'),
-                bcrypt.gensalt()
-            ).decode('utf-8')
+            # Hash the password
+            hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-            # Insert user
-            insert_user(username, password_hash, role)
+            # Insert into DB
+            cursor = conn.cursor()
+            cursor.execute(
+                "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)",
+                (username, hashed, role)
+            )
+            conn.commit()
+
             migrated += 1
 
+    conn.close()
     return True, f"Migrated: {migrated} users | Skipped: {skipped} lines."

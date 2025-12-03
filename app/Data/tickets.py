@@ -1,15 +1,14 @@
 import pandas as pd
 from app.Data.db import connect_database
-
-def insert_ticket(date, issue_type, severity, status, assigned_to, description):
+def insert_ticket(ticket_id,priority,description,status,assigned_to,created_at,resolution_time_hours):
     conn = connect_database()
     cursor = conn.cursor()
 
     cursor.execute("""
         INSERT INTO it_tickets
-        (date, issue_type, severity, status, assigned_to, description)
+        (ticket_id,priority,description,status,assigned_to,created_at,resolution_time_hours)
         VALUES (?, ?, ?, ?, ?, ?)
-    """, (date, issue_type, severity, status, assigned_to, description))
+    """, (ticket_id,priority,description,status,assigned_to,created_at,resolution_time_hours))
 
     conn.commit()
     ticket_id = cursor.lastrowid

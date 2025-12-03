@@ -13,17 +13,18 @@ def create_users_table(conn):
         )
     """)
     conn.commit()
-
+    
 def create_cyber_incidents_table(conn):
     cursor = conn.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS cyber_incidents (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        incident_id TEXT,
         severity TEXT,
+        category TEXT,
         status TEXT,
         description TEXT,
         reported_by TEXT,
-        incident_type TEXT,
         date_reported TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (reported_by) REFERENCES users(username)
     )
@@ -31,21 +32,18 @@ def create_cyber_incidents_table(conn):
     conn.commit()
     print("✅ cyber_incidents table created successfully!")
 
+
 def create_datasets_metadata_table(conn):
- 
     cursor = conn.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS datasets_metadata (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        dataset_name TEXT NOT NULL,
-        category TEXT,
-        severity TEXT,
-        source TEXT,
-        last_updated TEXT,
-        record_count INTEGER,
-        file_size_mb REAL,
-        num_columns INTEGER, 
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        dataset_id TEXT NOT NULL,
+        name TEXT,
+        num_columns INTEGER,
+        num_rows INTEGER,
+        uploaded_by, 
+        upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
     conn.commit()
@@ -58,15 +56,14 @@ def create_it_tickets_table(conn):
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS it_tickets (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
             ticket_id TEXT UNIQUE NOT NULL,
-            user_id INTEGER NOT NULL,
-            issue_title TEXT NOT NULL,
-            issue_description TEXT,
-            assigned_to TEXT,
-            severity TEXT,
             priority TEXT DEFAULT 'Medium',
+            description TEXT,
             status TEXT DEFAULT 'Open',
-            date_created TEXT,
+            assigned_to TEXT,
+            created_at TEXT,
+            resolution_time_hours TEXT,
             FOREIGN KEY (user_id) REFERENCES users(id)
         )
         """)

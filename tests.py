@@ -47,7 +47,6 @@ def run_comprehensive_tests():
         "Test Incident",
         "Low",
         "Open",
-        "This is a test incident",
         "test_user"
     )
     print(f"  Create:  ✅ Incident #{test_id} created")

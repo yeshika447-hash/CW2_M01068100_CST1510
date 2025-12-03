@@ -1,14 +1,13 @@
 import pandas as pd
 from app.Data.db import connect_database
-
-def insert_incident(date_reported, incident_type, severity, status, description, reported_by):
+def insert_incident(date_reported, severity, category, status, description, reported_by):
     conn = connect_database()
     cursor = conn.cursor()
     cursor.execute("""
         INSERT INTO cyber_incidents 
-        (date_reported, incident_type, severity, status, description, reported_by)
+        (date_reported, severity, category, status, description, reported_by)
         VALUES (?, ?, ?, ?, ?, ?)
-    """, (date_reported, incident_type, severity, status, description, reported_by))
+    """, (date_reported, severity,category, status, description, reported_by))
     conn.commit()
     incident_id = cursor.lastrowid
     conn.close()

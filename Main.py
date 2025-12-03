@@ -26,8 +26,8 @@ def main():
     # 4. Test CRUD
     incident_id = insert_incident(
         "2024-11-05",
-        "Phishing",
         "High",
+        "Phishing",
         "Open",
         "Suspicious email detected",
         "alice"

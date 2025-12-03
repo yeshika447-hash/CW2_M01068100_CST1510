@@ -3,6 +3,19 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 import csv
+from app.Utils.sidebar import render_sidebar
+
+# Hide default multipage navigation
+hide_default_pages = """
+<style>
+div[data-testid="stSidebarNav"] ul {display: none !important;}
+div[data-testid="stSidebarNav"] h2 {display: none !important;}
+</style>
+"""
+st.markdown(hide_default_pages, unsafe_allow_html=True)
+
+# Render shared sidebar
+render_sidebar()
 
 # Paths
 data_folder = Path("DATA")

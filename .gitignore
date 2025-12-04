@@ -1,0 +1,14 @@
+# Ignore environment folders
+.venv
+
+# Ignore secret files
+secrets.toml
+config.yaml
+
+# Ignore logs
+*.log
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+

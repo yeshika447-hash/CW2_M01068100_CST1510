@@ -11,6 +11,8 @@ def render_sidebar():
             st.switch_page("pages/2_Analytics.py")
         if st.button("⚙️ Settings"):
             st.switch_page("pages/3_Settings.py")
+        if st.button("🤖 AI Assistance"):
+            st.switch_page("pages/4_Ai.py")
 
         st.markdown("---")
         st.subheader("Users & Access")

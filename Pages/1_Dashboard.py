@@ -39,6 +39,8 @@ if not st.session_state.logged_in:
     st.stop()
 
 # ----------------- DOMAIN DASHBOARD -------------------
+user_domain = st.session_state.user.get("domain")
+
 # Cyber
 def cyber_dashboard():
     st.header("🔐 Cybersecurity Dashboard")
@@ -143,7 +145,7 @@ def it_operations_dashboard():
         st.plotly_chart(fig2)
     else:
         st.info("No timestamp or resolution_time column to show trend.")
-
+    
 # ---------------- ROLE-BASED AUTO DASHBOARD ----------------
 def show_dashboard():
     role = st.session_state.get("role")

@@ -27,6 +27,12 @@ if "logged_in" not in st.session_state or not st.session_state.logged_in:
 st.title("📊 Domain Analytics Center")
 role = st.session_state.get("role", None)
 
+if "user" not in st.session_state:
+    st.session_state.user = {"domain": "Cyber"}
+
+user_domain = st.session_state.user.get("domain", "Cyber")
+
+
 # ---------------- CYBER ANALYTICS -------------------
 def cyber_analytics():
     st.header("🔐 Cybersecurity Analytics")

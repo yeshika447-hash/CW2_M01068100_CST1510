@@ -2,7 +2,7 @@
 .venv
 
 # Ignore secret files
-.streamlit/
+.streamlit\secrets.toml
 config.yaml
 
 # Ignore logs

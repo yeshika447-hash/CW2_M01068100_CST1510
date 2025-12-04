@@ -2,7 +2,7 @@
 .venv
 
 # Ignore secret files
-secrets.toml
+.streamlit/secrets.toml
 config.yaml
 
 # Ignore logs
@@ -11,4 +11,3 @@ config.yaml
 # Ignore system files
 .DS_Store
 Thumbs.db
-.streamlit

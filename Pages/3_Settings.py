@@ -40,14 +40,16 @@ body, .stApp {background-color: #ffffff; color: #000000;}
 st.markdown(dark_css if st.session_state.dark_mode else light_css, unsafe_allow_html=True)
 
 # -------------------- Account Settings --------------------
-if "user" not in st.session_state:
+# Ensure `st.session_state.user` is ALWAYS a dict
+if "user" not in st.session_state or not isinstance(st.session_state.user, dict):
     st.session_state.user = {
-        "username": "guest",
-        "password": "1234",
+        "username": st.session_state.get("username", "guest"),
+        "password": st.session_state.users.get(st.session_state.get("username", ""), {}).get("password", "1234"),
         "domain": "Cyber",
         "timezone": "UTC",
         "language": "English"
     }
+
 
 if "users" not in st.session_state:
     st.session_state.users = {}  # {username: {password, role}}

@@ -59,10 +59,17 @@ with tab_login:
             st.session_state.logged_in = True
             st.session_state.username = login_username
             st.session_state.role = users[login_username]["role"]
+
+            st.session_state.user = {
+                "username": login_username,
+                "password": users[login_username]["password"],
+                "role": users[login_username]["role"],
+                "timezone": "UTC",
+                "language": "English",
+            }
+
             st.success("Login successful!")
             st.switch_page("pages/1_Dashboard.py")
-        else:
-            st.error("Invalid username or password.")
 
 
 # ----- REGISTER TAB -----
@@ -86,4 +93,14 @@ with tab_register:
                 "password": new_password,
                 "role": new_role,
             }
-            st.success("Account created! You can now log in.")
+
+            # Create user session object
+            st.session_state.user = {
+            "username": new_username,
+            "password": new_password,
+            "role": new_role,
+            "timezone": "UTC",
+            "language": "English",
+        }
+    st.success("Account created! You can now log in.")
+

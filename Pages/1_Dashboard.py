@@ -39,7 +39,6 @@ if not st.session_state.logged_in:
     st.stop()
 
 # ----------------- DOMAIN DASHBOARD -------------------
-user_domain = st.session_state.user.get("domain")
 
 # Cyber
 def cyber_dashboard():
